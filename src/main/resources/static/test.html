@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>Test Login</title></head>
+<body>
+<h2>Login Test</h2>
+<input id="user" value="admin"><br>
+<input id="pass" type="password" value="admin123"><br>
+<button onclick="doLogin()">Login</button>
+<pre id="result"></pre>
+<script>
+    async function doLogin() {
+        const username = document.getElementById('user').value;
+        const password = document.getElementById('pass').value;
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({username, password})
+            });
+            const data = await res.json();
+            document.getElementById('result').innerText = JSON.stringify(data, null, 2);
+        } catch(e) {
+            document.getElementById('result').innerText = 'Error: ' + e.message;
+        }
+    }
+</script>
+</body>
+</html>

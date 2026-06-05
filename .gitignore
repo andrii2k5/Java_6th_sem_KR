@@ -1,0 +1,33 @@
+# Compiled
+*.class
+target/
+*.jar
+*.war
+
+# Maven
+log/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+.mvn/
+mvnw
+mvnw.cmd
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Docker volumes (не треба комітити)
+postgres_data/
+
+# OS
+Thumbs.db
+.DS_Store
+*.log

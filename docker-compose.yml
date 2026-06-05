@@ -1,0 +1,34 @@
+services:
+  postgres_db:
+    image: postgres:15
+    container_name: fishmarket-db
+    environment:
+      POSTGRES_DB: fishmarket
+      POSTGRES_USER: fishuser
+      POSTGRES_PASSWORD: fishpass
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - fishmarket-network
+
+  fishmarket-app:
+    build: .
+    container_name: fishmarket-app
+    depends_on:
+      - postgres_db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/fishmarket
+      SPRING_DATASOURCE_USERNAME: fishuser
+      SPRING_DATASOURCE_PASSWORD: fishpass
+    ports:
+      - "8080:8080"
+    networks:
+      - fishmarket-network
+
+networks:
+  fishmarket-network:
+
+volumes:
+  postgres_data:
